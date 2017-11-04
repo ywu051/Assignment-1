@@ -1,3 +1,3 @@
 # Assignment
 
-Composite (& decorator)
+Composite (& decorator) are required for this assignment
