@@ -41,23 +41,8 @@ class Command : public Instruction {
 class Connector : public Instruction {
     public:
         Connector() {}
-        Connector(char* s) : Instruction(s) {
-            /*
-            char* a = new char(';');
-            char* b = new char('&');
-            char* c = new char('|');
-
-            if (s == a) {exec = true;}
-            if (s == b) {exec = true;}
-            if (s == c) {exec = false;}
-
-            delete a;
-            delete b;
-            delete c;
-  
-            a = NULL;
-            b = NULL;
-            c = NULL; */
+        Connector(char* s) : Instruction(s) {   
+            /*strcmp returns 0 when the two arguments are the same*/
             if      (strcmp(s, ";") == 0) {exec = true;}
             else if (strcmp(s, "&") == 0) {exec = true;}
             else if (strcmp(s, "|") == 0) {exec = false;}
