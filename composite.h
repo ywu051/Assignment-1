@@ -42,6 +42,7 @@ class Connector : public Instruction {
     public:
         Connector() {}
         Connector(char* s) : Instruction(s) {
+            /*
             char* a = new char(';');
             char* b = new char('&');
             char* c = new char('|');
@@ -56,7 +57,10 @@ class Connector : public Instruction {
   
             a = NULL;
             b = NULL;
-            c = NULL;
+            c = NULL; */
+            if      (strcmp(s, ";") == 0) {exec = true;}
+            else if (strcmp(s, "&") == 0) {exec = true;}
+            else if (strcmp(s, "|") == 0) {exec = false;}
         }
         ~Connector() {
         
