@@ -1,7 +1,7 @@
 #ifndef __COMPOSITE_H__
 #define __COMPOSITE_H__
 #include <iostream>
-#include <string>
+#include <string.h>
 #include <vector>
 #include <stdio.h>
 
