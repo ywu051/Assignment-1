@@ -13,7 +13,7 @@ class Commander {
         CmdString CS;
 
         bool runNext(bool exec, Instruction* conn) {
-            if (conn->str == ";")
+            if (strcmp(conn->str, ";"))
                 return true;
             else if (conn->exec == exec)
                 return true;
