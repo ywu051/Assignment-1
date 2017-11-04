@@ -74,13 +74,14 @@ class Commander {
                         tok = strtok(NULL, " ");
                         
                     }   
-                    vch.push_back('\0');                 
+                    //vch.push_back('\0');   
                     //intending to instantiate array of char pointers//
                     int vsize = vch.size();
-                    char** charr = new char* [vsize];
+                    char** charr = new char* [vsize+1];
                     for (int j = 0; j < vch.size(); j++) {
                         charr[j] = vch[j];
                     }
+                    charr[vch.size()] = NULL;
                     //charr[vch.size()] = new char('\0');
                     /*
                     for (int i = 0; i < vsize; i++) {
