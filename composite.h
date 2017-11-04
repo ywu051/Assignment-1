@@ -70,7 +70,7 @@ class CmdString : public Instruction {
         void execute() {}
         
         void print() {
-            for (int i = 0; i < V.size(); i++) {
+            for (int i = 0; i < (int)V.size(); i++) {
                 V[i]->print();
                 cout << endl;
             }
