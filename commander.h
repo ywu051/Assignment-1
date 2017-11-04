@@ -1,7 +1,7 @@
 #ifndef __COMMANDER_H__
 #define __COMMANDER_H__
 #include <iostream>
-#include <string>
+#include <string.h>
 #include <cstring>
 #include <vector>
 #include <sys/wait.h>
@@ -52,7 +52,7 @@ class Commander {
                     }
                     else
                         CS.V[count]->exec = true;
-                    if (CS.V.size() - 1 != count) {
+                    if ((int)CS.V.size() - 1 != count) {
                         run = runNext(CS.V[count]->exec, CS.V[count+1]);
                     }
                 }
@@ -69,7 +69,6 @@ class Commander {
                     
                     char* tok =  strtok(ch, " ");
                     
-                    int k = 0;
                     while (tok != NULL) {
                         vch.push_back(tok);
                         tok = strtok(NULL, " ");
@@ -79,7 +78,7 @@ class Commander {
                     //intending to instantiate array of char pointers//
                     int vsize = vch.size();
                     char** charr = new char* [vsize+1];
-                    for (int j = 0; j < vch.size(); j++) {
+                    for (int j = 0; j < vsize; j++) {
                         charr[j] = vch[j];
                     }
                     charr[vch.size()] = NULL;
@@ -102,7 +101,7 @@ class Commander {
                     std::cout << "fork failed" << std::endl;
                 }
                 count += 2;
-            } while (CS.V[count]->str != "exit" && count < size - 1);
+            } while (strcmp(CS.V[count]->str, "exit") != 0 && count < size - 1);
         }  
 };
 
