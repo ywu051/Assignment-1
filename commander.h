@@ -6,7 +6,7 @@
 #include <vector>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <stdlib.h>
+#include <stdio.h>
 #include "composite.h"
 
 class Commander {
