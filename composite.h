@@ -25,7 +25,6 @@ class Command : public Instruction {
     public:
         Command() {}
         Command(char* s) : Instruction(s) {};
-        ~Command() {}
 
         void execute() {
             // execute using execvp and vipid //
@@ -42,24 +41,9 @@ class Connector : public Instruction {
     public:
         Connector() {}
         Connector(char* s) : Instruction(s) {
-            char* a = new char(';');
-            char* b = new char('&');
-            char* c = new char('|');
-
-            if (s == a) {exec = true;}
-            if (s == b) {exec = true;}
-            if (s == c) {exec = false;}
-
-            delete a;
-            delete b;
-            delete c;
-  
-            a = NULL;
-            b = NULL;
-            c = NULL;
-        }
-        ~Connector() {
-        
+            if (s == ";") {exec = true;}
+            if (s == "&") {exec = true;}
+            if (s == "|") {exec = false;}
         }
 
         void execute() {}

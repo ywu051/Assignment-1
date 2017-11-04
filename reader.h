@@ -11,19 +11,13 @@ class Reader {
     public:
         string userInput;
         
+        char* tok;
         char* tok2;
-        char* tok1;
 
         CmdString CS;
 
         Reader() {}
-        ~Reader() {
-            delete tok2;
-            delete tok1;
-
-            tok2 = NULL;
-            tok1 = NULL;
-        }
+        ~Reader() {}
      
         
 
@@ -63,29 +57,31 @@ class Reader {
             char* ch2 = new char [userInput.size()];
             strcpy(ch2, userInput.c_str());
             //cout << "3" << endl;
+            char* tok2;
+            char* tok3;
     
 
             // takes two c_str pointers and takes relevant characters //
-            tok2 = strtok(ch2, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-<>./\"");
-            tok1 = strtok(ch1, ";&|");
+            tok3 = strtok(ch2, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-<>./\"");
+            tok2 = strtok(ch1, ";&|");
 
-            while (tok1 != NULL) {
-                Command* cmd = createCommand(tok1);
+            while (tok2 != NULL) {
+                Command* cmd = createCommand(tok2);
                 CS.addInstruction(cmd);
            
-                if (tok2 != NULL) {
-                    CS.addInstruction(createConnector(tok2));
+                if (tok3 != NULL) {
+                    CS.addInstruction(createConnector(tok3));
                 }
 
-                tok1 = strtok(NULL, ";&|");
-                tok2 = strtok(NULL, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-<>./\"");
+                tok2 = strtok(NULL, ";&|");
+                tok3 = strtok(NULL, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-<>./\"");
             }    
 
         }
       
         // displays command line entry //
         void display() {
-            cout << "$ ";
+            cout << "{}: ";
             read();
         } 
 };
