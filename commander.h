@@ -62,7 +62,7 @@ class Commander {
                     // must parse Command in CmdString at current position
                     str = CS.V[count]->str;
                     str = str+"\0";
-                    char* ch = new char[str.length()];
+                    char* ch = new char[str.length()+1];
                     strcpy(ch, str.c_str());
                     vector<char*> vch;
                     
