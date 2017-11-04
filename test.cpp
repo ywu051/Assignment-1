@@ -6,12 +6,15 @@
 int main() {
 
     Reader reader;
+    Commander commander;
 
     bool exit = false;
     
     while (exit != true) {
+        reader.CS.V.clear();
+        commander.CS.V.clear();
         reader.display();
-        //reader.CS.print();
+        commander.setCS(reader.CS);
+        commander.execute();
     }
-
 }
