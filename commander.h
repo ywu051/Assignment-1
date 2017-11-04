@@ -32,16 +32,17 @@ class Commander {
             int status;
             bool run = true;            
 
-            while (CS.V[count]->str != "exit" && count < size - 1) {
+            do {
                 //std::cout << "inside while" << endl;
 
                 run = true;
                 pid = fork();
             
-                cout << "right before pid if statements" << endl;
+                //cout << "right before pid if statements" << endl;
  
                 if (pid > 0) {
                     // parent fork
+                    //cout << "parent" << endl;
                     w = wait(&status);
                     //parser for individual commands//
                     if (w == -1) {
@@ -56,38 +57,40 @@ class Commander {
                 }
                 else if (pid == 0) {
 
-                    cout << "child - parse" << endl;
+                    //cout << "child - parse" << endl;
 
                     // must parse Command in CmdString at current position
                     str = CS.V[count]->str;
+                    str = str+"\0";
                     char* ch = new char[str.length()];
                     strcpy(ch, str.c_str());
                     vector<char*> vch;
-
+                    
                     char* tok =  strtok(ch, " ");
-                    cout << tok << endl;
+                    
+                    int k = 0;
                     while (tok != NULL) {
-                        //cout << "tok: " << tok << endl;
                         vch.push_back(tok);
                         tok = strtok(NULL, " ");
-                    }                    
+                        
+                    }   
+                    vch.push_back('\0');                 
                     //intending to instantiate array of char pointers//
-                    int vsize = vch.size() + 1;
+                    int vsize = vch.size();
                     char** charr = new char* [vsize];
                     for (int j = 0; j < vch.size(); j++) {
-                        cout << "vch[j]: " << vch[j] << endl;
                         charr[j] = vch[j];
-                        cout << "charr[j]: " << charr[j] << endl;
                     }
-                    charr[vch.size()] = new char('\0');
-                    
+                    //charr[vch.size()] = new char('\0');
+                    /*
                     for (int i = 0; i < vsize; i++) {
                         cout << "charr[" << i << "]: " << charr[i] << endl;
-                    }
 
+                    }
+                    */
                     if (run) {
-                        cout << "finish him" << endl; 
-                        execvp(charr[0], charr);
+                        cout << execvp(charr[0], charr) << endl;
+                        perror(*charr);
                     }
                     else {
                         CS.V[count]->exec = true;
@@ -97,11 +100,8 @@ class Commander {
                     std::cout << "fork failed" << std::endl;
                 }
                 count += 2;
-            }
-        } 
-
-        
-        
+            } while (CS.V[count]->str != "exit" && count < size - 1);
+        }  
 };
 
 
